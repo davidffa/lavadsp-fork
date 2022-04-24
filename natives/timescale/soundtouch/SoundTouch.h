@@ -41,13 +41,6 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Last changed  : $Date: 2017-07-30 12:35:00 +0300 (su, 30 heinä 2017) $
-// File revision : $Revision: 4 $
-//
-// $Id: SoundTouch.h 253 2017-07-30 09:35:00Z oparviai $
-//
-////////////////////////////////////////////////////////////////////////////////
-//
 // License :
 //
 //  SoundTouch audio processing library
@@ -79,10 +72,10 @@ namespace soundtouch
 {
 
 /// Soundtouch library version string
-#define SOUNDTOUCH_VERSION          "2.0.0"
+#define SOUNDTOUCH_VERSION          "2.3.1"
 
 /// SoundTouch library version id
-#define SOUNDTOUCH_VERSION_ID       (20000)
+#define SOUNDTOUCH_VERSION_ID       (20301)
 
 //
 // Available setting IDs for the 'setSetting' & 'get_setting' functions:
@@ -216,7 +209,7 @@ protected :
 
 public:
     SoundTouch();
-    virtual ~SoundTouch();
+    virtual ~SoundTouch() override;
 
     /// Get SoundTouch library version string
     static const char *getVersionString();
@@ -294,7 +287,7 @@ public:
             uint numSamples                         ///< Number of samples in buffer. Notice
                                                     ///< that in case of stereo-sound a single sample
                                                     ///< contains data for both channels.
-            );
+            ) override;
 
     /// Output samples from beginning of the sample buffer. Copies requested samples to 
     /// output buffer and removes them from the sample buffer. If there are less than 
@@ -303,7 +296,7 @@ public:
     /// \return Number of samples returned.
     virtual uint receiveSamples(SAMPLETYPE *output, ///< Buffer where to copy output samples.
         uint maxSamples                 ///< How many samples to receive at max.
-        );
+        ) override;
 
     /// Adjusts book-keeping so that given number of samples are removed from beginning of the 
     /// sample buffer without copying them anywhere. 
@@ -311,16 +304,16 @@ public:
     /// Used to reduce the number of samples in the buffer when accessing the sample buffer directly
     /// with 'ptrBegin' function.
     virtual uint receiveSamples(uint maxSamples   ///< Remove this many samples from the beginning of pipe.
-        );
+        ) override;
 
     /// Clears all the samples in the object's output and internal processing
     /// buffers.
-    virtual void clear();
+    virtual void clear() override;
 
     /// Changes a setting controlling the processing system behaviour. See the
     /// 'SETTING_...' defines for available setting ID's.
     /// 
-    /// \return 'true' if the setting was succesfully changed
+    /// \return 'true' if the setting was successfully changed
     bool setSetting(int settingId,   ///< Setting ID number. see SETTING_... defines.
                     int value        ///< New setting value.
                     );
